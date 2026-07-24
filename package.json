@@ -7,6 +7,7 @@
     "dev": "vite --host 0.0.0.0",
     "build": "vue-tsc --noEmit && vite build",
     "build:pages": "vue-tsc --noEmit && vite build --mode pages --base=/rail-drone-mission-studio/",
+    "build:aliyun": "vue-tsc --noEmit && vite build --mode pages --base=/projects/rail-drone-mission-studio/",
     "type-check": "vue-tsc --noEmit",
     "test": "vitest run",
     "preview": "vite preview --host 0.0.0.0"

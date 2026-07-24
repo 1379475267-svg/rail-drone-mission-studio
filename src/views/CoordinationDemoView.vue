@@ -8,6 +8,7 @@ import CoordinationStatusPanel from '@/components/coordination/CoordinationStatu
 import CoordinationToolbar from '@/components/coordination/CoordinationToolbar.vue'
 import FaultInjectionPanel from '@/components/coordination/FaultInjectionPanel.vue'
 import PerceptionStage from '@/components/coordination/PerceptionStage.vue'
+import WorkspaceNavigation from '@/components/layout/WorkspaceNavigation.vue'
 import { createLineGuidanceController } from '@/services/guidance/lineGuidanceController'
 import { createVirtualDroneEngine } from '@/services/guidance/virtualDroneEngine'
 import { BrowserEdgeAdapter } from '@/services/recognition/browserEdgeAdapter'
@@ -654,7 +655,14 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <main class="coordination-workspace">
+  <main
+    class="coordination-workspace"
+    tabindex="-1"
+    data-workspace-root
+    aria-label="协同闭环工作区"
+  >
+    <WorkspaceNavigation />
+
     <CoordinationToolbar
       :mode="mode"
       :run-status="toolbarRunStatus"

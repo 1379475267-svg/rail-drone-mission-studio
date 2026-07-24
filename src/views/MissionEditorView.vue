@@ -5,6 +5,7 @@ import BottomSimulationPanel from '@/components/layout/BottomSimulationPanel.vue
 import LeftToolPanel from '@/components/layout/LeftToolPanel.vue'
 import PropertyPanel from '@/components/layout/PropertyPanel.vue'
 import TopToolbar from '@/components/layout/TopToolbar.vue'
+import WorkspaceNavigation from '@/components/layout/WorkspaceNavigation.vue'
 import MissionCanvas from '@/components/canvas/MissionCanvas.vue'
 import { useMissionSimulation } from '@/composables/useMissionSimulation'
 import { useProjectStorage } from '@/composables/useProjectStorage'
@@ -210,7 +211,14 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <main class="mission-editor">
+  <main
+    class="mission-editor"
+    tabindex="-1"
+    data-workspace-root
+    aria-label="任务编排工作区"
+  >
+    <WorkspaceNavigation />
+
     <TopToolbar
       :project-name="projectStore.project.name"
       :simulation-status="simulationStore.status"
@@ -300,7 +308,7 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100dvh;
   min-height: 42rem;
-  grid-template-rows: auto minmax(0, 1fr) 15rem;
+  grid-template-rows: auto auto minmax(0, 1fr) 15rem;
   overflow: hidden;
   background: var(--color-paper);
 }
@@ -321,7 +329,7 @@ onBeforeUnmount(() => {
 
 @media (max-width: 68rem) {
   .mission-editor {
-    grid-template-rows: auto minmax(0, 1fr) 18rem;
+    grid-template-rows: auto auto minmax(0, 1fr) 18rem;
   }
 
   .editor-workspace {
@@ -334,7 +342,7 @@ onBeforeUnmount(() => {
   .mission-editor {
     height: auto;
     min-height: 100dvh;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto auto auto;
     overflow: visible;
   }
 

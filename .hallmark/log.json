@@ -1,5 +1,14 @@
 [
   {
+    "date": "2026-07-25",
+    "scope": "app",
+    "macrostructure": "Index-First + Workbench",
+    "theme": "Cobalt",
+    "enrichment": "none",
+    "brief": "Unified launcher and persistent navigation for three operational workspaces",
+    "variation": "index-first workspace directory with a persistent application command bar and dark current-workspace state"
+  },
+  {
     "date": "2026-07-24",
     "macrostructure": "Map / Diagram",
     "theme": "Cobalt",

@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import {
-  Aim,
-  DataLine,
   Delete,
   Download,
   FolderAdd,
@@ -12,10 +10,7 @@ import {
   VideoPause,
   VideoPlay,
 } from '@element-plus/icons-vue'
-import { useRouter } from 'vue-router'
 import type { SimulationStatus } from '@/types/simulation'
-
-const router = useRouter()
 
 const props = defineProps<{
   projectName: string
@@ -42,16 +37,6 @@ const updateName = (value: string) => {
 
 <template>
   <header class="top-toolbar">
-    <div class="brand-lockup" aria-label="RailDrone Mission Studio">
-      <span class="brand-mark" aria-hidden="true">
-        <DataLine />
-      </span>
-      <div class="brand-copy">
-        <strong>RailDrone</strong>
-        <span>Mission Studio</span>
-      </div>
-    </div>
-
     <div class="project-identity">
       <span class="project-kicker">当前任务</span>
       <el-input
@@ -75,20 +60,6 @@ const updateName = (value: string) => {
       <el-tooltip content="导出 JSON" placement="bottom" :show-after="800">
         <el-button :icon="Download" aria-label="导出 JSON" @click="emit('export')" />
       </el-tooltip>
-
-      <el-tooltip content="打开接触线识别工作台" placement="bottom" :show-after="800">
-        <el-button :icon="Aim" aria-label="接触线识别" @click="router.push('/recognition')">
-          识别
-        </el-button>
-      </el-tooltip>
-
-      <el-tooltip content="打开机器人与无人机协同闭环 Demo" placement="bottom" :show-after="800">
-        <el-button :icon="DataLine" aria-label="协同闭环" @click="router.push('/coordination')">
-          协同
-        </el-button>
-      </el-tooltip>
-
-      <span class="toolbar-divider" aria-hidden="true" />
 
       <el-tooltip content="撤销将在后续阶段提供" placement="bottom" :show-after="800">
         <el-button :icon="RefreshLeft" aria-label="撤销，后续阶段" disabled />
@@ -149,7 +120,7 @@ const updateName = (value: string) => {
   position: relative;
   z-index: var(--z-sticky);
   display: grid;
-  grid-template-columns: auto minmax(12rem, 20rem) 1fr;
+  grid-template-columns: minmax(14rem, 22rem) minmax(0, 1fr);
   align-items: center;
   gap: var(--space-lg);
   min-height: 4.75rem;
@@ -159,47 +130,12 @@ const updateName = (value: string) => {
   box-shadow: 0 var(--space-2xs) var(--space-sm) var(--color-shadow);
 }
 
-.brand-lockup,
-.brand-copy,
 .project-identity,
 .toolbar-actions {
   display: flex;
   align-items: center;
 }
 
-.brand-lockup {
-  gap: var(--space-sm);
-  min-width: max-content;
-}
-
-.brand-mark {
-  display: grid;
-  width: 2.5rem;
-  height: 2.5rem;
-  place-items: center;
-  color: var(--color-accent-ink);
-  background: var(--color-accent);
-  border-radius: var(--radius-md);
-}
-
-.brand-mark :deep(svg) {
-  width: 1.35rem;
-}
-
-.brand-copy {
-  align-items: flex-start;
-  flex-direction: column;
-  line-height: 1.05;
-}
-
-.brand-copy strong {
-  color: var(--color-ink);
-  font-family: var(--font-display);
-  font-size: var(--text-md);
-  letter-spacing: -0.035em;
-}
-
-.brand-copy span,
 .project-kicker {
   color: var(--color-muted);
   font-family: var(--font-mono);
@@ -267,7 +203,7 @@ const updateName = (value: string) => {
 
 @media (max-width: 78rem) {
   .top-toolbar {
-    grid-template-columns: auto minmax(10rem, 16rem) 1fr;
+    grid-template-columns: minmax(10rem, 16rem) minmax(0, 1fr);
     gap: var(--space-sm);
   }
 
@@ -278,12 +214,11 @@ const updateName = (value: string) => {
 
 @media (max-width: 54rem) {
   .top-toolbar {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .project-identity {
-    order: 3;
-    grid-column: 1 / -1;
+    grid-column: 1;
   }
 
   .toolbar-actions {
