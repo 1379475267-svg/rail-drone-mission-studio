@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  DataLine,
   Download,
   Refresh,
   SwitchButton,
@@ -43,19 +42,10 @@ const runStatusLabels: Record<string, string> = {
 
 <template>
   <header class="coordination-toolbar">
-    <RouterLink class="brand-lockup" to="/" aria-label="返回任务编排">
-      <span class="brand-mark" aria-hidden="true"><DataLine /></span>
-      <span class="brand-copy">
-        <strong>RailDrone</strong>
-        <span>Mission Studio</span>
-      </span>
-    </RouterLink>
-
-    <nav class="workspace-switcher" aria-label="工作区切换">
-      <RouterLink to="/">任务编排</RouterLink>
-      <RouterLink to="/recognition">接触线识别</RouterLink>
-      <RouterLink to="/coordination" aria-current="page">协同闭环</RouterLink>
-    </nav>
+    <div class="workspace-context">
+      <span>协同运行台</span>
+      <strong>机器人—无人机协同闭环</strong>
+    </div>
 
     <div class="mode-switcher">
       <span class="control-label">运行模式</span>
@@ -119,7 +109,7 @@ const runStatusLabels: Record<string, string> = {
   position: relative;
   z-index: var(--z-sticky);
   display: grid;
-  grid-template-columns: auto auto minmax(12rem, 1fr) auto;
+  grid-template-columns: minmax(13rem, 1fr) auto auto;
   align-items: center;
   gap: var(--space-lg);
   min-width: 0;
@@ -130,9 +120,7 @@ const runStatusLabels: Record<string, string> = {
   border-bottom: var(--rule-thin) solid var(--color-rule);
 }
 
-.brand-lockup,
-.brand-copy,
-.workspace-switcher,
+.workspace-context,
 .mode-switcher,
 .run-actions,
 .run-status {
@@ -140,73 +128,27 @@ const runStatusLabels: Record<string, string> = {
   align-items: center;
 }
 
-.brand-lockup {
-  min-height: var(--control-height);
-  gap: var(--space-sm);
-  color: inherit;
-  text-decoration: none;
-}
-
-.brand-mark {
-  display: grid;
-  width: var(--control-height);
-  height: var(--control-height);
-  place-items: center;
-  color: var(--color-accent-ink);
-  background: var(--color-accent);
-  border-radius: var(--radius-md);
-}
-
-.brand-mark :deep(svg) { width: 1.35rem; }
-
-.brand-copy {
+.workspace-context {
   align-items: flex-start;
   flex-direction: column;
-  line-height: 1.05;
+  gap: var(--space-3xs);
+  line-height: 1.1;
 }
 
-.brand-copy strong {
+.workspace-context strong {
   color: var(--color-ink);
   font-family: var(--font-display);
   font-size: var(--text-md);
   letter-spacing: -0.035em;
 }
 
-.brand-copy span,
+.workspace-context span,
 .control-label {
   color: var(--color-muted);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-}
-
-.workspace-switcher {
-  gap: var(--space-2xs);
-  padding: var(--space-2xs);
-  background: var(--color-paper-2);
-  border: var(--rule-thin) solid var(--color-rule);
-  border-radius: var(--radius-md);
-}
-
-.workspace-switcher a {
-  display: inline-flex;
-  min-height: var(--control-height);
-  align-items: center;
-  padding: var(--space-xs) var(--space-sm);
-  color: var(--color-muted);
-  border-radius: var(--radius-sm);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.workspace-switcher a[aria-current='page'],
-.workspace-switcher a.router-link-active {
-  color: var(--color-accent-hover);
-  background: var(--color-surface-raised);
-  box-shadow: 0 0 0 var(--rule-thin) var(--color-rule);
 }
 
 .mode-switcher {
@@ -250,13 +192,9 @@ const runStatusLabels: Record<string, string> = {
 .run-status.is-aborted i { background: var(--color-danger); }
 .run-status.is-completed i { background: var(--color-accent); }
 
-@media (hover: hover) and (pointer: fine) {
-  .workspace-switcher a:hover { color: var(--color-ink); }
-}
-
 @media (max-width: 90rem) {
   .coordination-toolbar {
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-columns: minmax(12rem, 1fr) auto;
   }
 
   .mode-switcher {
@@ -269,8 +207,7 @@ const runStatusLabels: Record<string, string> = {
 }
 
 @media (max-width: 64rem) {
-  .coordination-toolbar { grid-template-columns: auto minmax(0, 1fr); }
-  .workspace-switcher { justify-self: end; }
+  .coordination-toolbar { grid-template-columns: minmax(0, 1fr) auto; }
   .run-actions {
     order: 4;
     grid-column: 1 / -1;
@@ -285,26 +222,13 @@ const runStatusLabels: Record<string, string> = {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-sm);
   }
-  .brand-lockup {
+  .workspace-context {
     grid-column: 1;
     justify-self: start;
   }
-  .brand-copy { display: none; }
-  .workspace-switcher {
-    order: 2;
-    grid-column: 1;
-    width: 100%;
-    overflow: hidden;
-  }
-  .workspace-switcher a {
-    min-width: 0;
-    flex: 1 1 0;
-    justify-content: center;
-    padding-inline: var(--space-xs);
-    font-size: var(--text-xs);
-  }
+  .workspace-context span { display: none; }
   .mode-switcher {
-    order: 3;
+    order: 2;
     grid-column: 1;
     width: 100%;
     align-items: flex-start;
@@ -314,7 +238,7 @@ const runStatusLabels: Record<string, string> = {
   .mode-switcher :deep(.el-radio-group) { display: grid; width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .mode-switcher :deep(.el-radio-button__inner) { width: 100%; }
   .run-actions {
-    order: 4;
+    order: 3;
     grid-column: 1;
     display: grid;
     width: 100%;
@@ -329,7 +253,4 @@ const runStatusLabels: Record<string, string> = {
   }
 }
 
-@media (pointer: coarse) {
-  .workspace-switcher a { min-height: 2.75rem; }
-}
 </style>

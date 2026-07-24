@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import { onBeforeRouteLeave } from 'vue-router'
+import WorkspaceNavigation from '@/components/layout/WorkspaceNavigation.vue'
 import RecognitionInspector from '@/components/recognition/RecognitionInspector.vue'
 import RecognitionMediaStage from '@/components/recognition/RecognitionMediaStage.vue'
 import RecognitionSourcePanel from '@/components/recognition/RecognitionSourcePanel.vue'
@@ -156,6 +158,25 @@ async function confirmDiscardReview(): Promise<boolean> {
       {
         confirmButtonText: '继续清空',
         cancelButtonText: '保留当前结果',
+        type: 'warning',
+      },
+    )
+    return true
+  } catch {
+    return false
+  }
+}
+
+async function confirmWorkspaceLeave(): Promise<boolean> {
+  if (!hasReviewWork()) return true
+
+  try {
+    await ElMessageBox.confirm(
+      '当前识别结果包含人工校正或审核状态。离开工作区会清空本次本地素材与识别会话，请先导出需要保留的结果。',
+      '离开接触线识别工作区',
+      {
+        confirmButtonText: '仍然离开',
+        cancelButtonText: '返回导出',
         type: 'warning',
       },
     )
@@ -419,6 +440,8 @@ function handleGlobalKeydown(event: KeyboardEvent): void {
 
 onMounted(() => window.addEventListener('keydown', handleGlobalKeydown))
 
+onBeforeRouteLeave(() => confirmWorkspaceLeave())
+
 onBeforeUnmount(() => {
   window.removeEventListener('keydown', handleGlobalKeydown)
   recognitionController?.abort()
@@ -429,7 +452,14 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <main class="recognition-workspace">
+  <main
+    class="recognition-workspace"
+    tabindex="-1"
+    data-workspace-root
+    aria-label="接触线识别工作区"
+  >
+    <WorkspaceNavigation />
+
     <RecognitionToolbar
       :run-status="store.runStatus"
       :ready-label="readyStatusLabel"
@@ -514,7 +544,7 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100dvh;
   min-height: 44rem;
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
   overflow: hidden;
   background: var(--color-paper);
 }

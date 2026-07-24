@@ -9,18 +9,31 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'workspace-launcher',
+      component: () => import('@/views/WorkspaceLauncherView.vue'),
+      meta: { title: '选择工作区' },
+    },
+    {
+      path: '/mission',
       name: 'mission-editor',
       component: () => import('@/views/MissionEditorView.vue'),
+      meta: { title: '任务编排' },
     },
     {
       path: '/recognition',
       name: 'contact-line-recognition',
       component: () => import('@/views/RecognitionWorkspaceView.vue'),
+      meta: { title: '接触线识别' },
     },
     {
       path: '/coordination',
       name: 'robot-drone-coordination',
       component: () => import('@/views/CoordinationDemoView.vue'),
+      meta: { title: '协同闭环' },
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/',
     },
   ],
 })

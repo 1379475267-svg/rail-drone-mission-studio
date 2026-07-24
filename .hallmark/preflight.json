@@ -1,21 +1,9 @@
 {
-  "date": "2026-07-24",
-  "signals": {
-    "framework": "existing Vue 3.5 + TypeScript + Vite + Pinia + Element Plus project",
-    "fontStack": "local Bahnschrift + Segoe UI + Cascadia Code; no CDN dependency",
-    "palette": "Cobalt cool paper with restrained semantic status colours",
-    "motion": "functional Workbench motion with reduced-motion fallback",
-    "spacing": "4pt token scale"
-  },
-  "preserve": [
-    "Cobalt token system",
-    "Workbench application shell",
-    "technical-friendly product voice",
-    "Element Plus control states"
-  ],
-  "introduce": [
-    "media-first recognition workbench",
-    "image-pixel SVG annotation layer",
-    "manual review and export states"
-  ]
+  "date": "2026-07-25",
+  "framework": "Vue 3 + Vue Router + Pinia + Element Plus",
+  "font_stack": "Bahnschrift / Segoe UI Variable / Cascadia Code",
+  "palette": "Cobalt OKLCH tokens in tokens.css",
+  "motion": "motion-cut; CSS transitions only",
+  "spacing": "named 4pt scale in tokens.css",
+  "preserve": ["font stack", "Cobalt palette", "spacing scale", "existing business components"]
 }

@@ -6,12 +6,12 @@
 
 ## 在线体验
 
-| 部署环境 | 主工作区 | 接触线识别 | 协同闭环 |
-| --- | --- | --- | --- |
-| GitHub Pages | [打开任务编辑器](https://1379475267-svg.github.io/rail-drone-mission-studio/) | [打开识别工作区](https://1379475267-svg.github.io/rail-drone-mission-studio/#/recognition) | [打开协同闭环](https://1379475267-svg.github.io/rail-drone-mission-studio/#/coordination) |
-| 阿里云（HTTPS） | [打开任务编辑器](https://fhrzz.me/projects/rail-drone-mission-studio/) | [打开识别工作区](https://fhrzz.me/projects/rail-drone-mission-studio/#/recognition) | [打开协同闭环](https://fhrzz.me/projects/rail-drone-mission-studio/#/coordination) |
+| 部署环境 | 统一入口 |
+| --- | --- |
+| GitHub Pages | [打开 RailDrone Mission Studio](https://1379475267-svg.github.io/rail-drone-mission-studio/) |
+| 阿里云（HTTPS） | [打开 RailDrone Mission Studio](https://fhrzz.me/projects/rail-drone-mission-studio/) |
 
-两个入口均部署自公开仓库的 `main` 分支。阿里云版本挂载在个人站点的独立 `/projects/rail-drone-mission-studio/` 路径下，不替换站点主页；`fhrzz.me` 与 `www.fhrzz.me` 已启用 Let's Encrypt HTTPS，HTTP 入口会自动跳转至 HTTPS。
+打开任一链接后先选择工作区；进入后可通过页面顶部的全局切换栏随时在三个工作区之间切换，RailDrone 标识可返回选择页。两个入口均部署自公开仓库的 `main` 分支。阿里云版本挂载在个人站点的独立 `/projects/rail-drone-mission-studio/` 路径下，不替换站点主页；`fhrzz.me` 与 `www.fhrzz.me` 已启用 Let's Encrypt HTTPS，HTTP 入口会自动跳转至 HTTPS。
 
 > [!IMPORTANT]
 > 当前仓库是浏览器端的软件原型，不连接真实无人机、机器人或飞控。接触线识别采用确定性的图像边缘启发式基线，越障机构采用模拟适配器，二维闭环不代表真实飞行验证。请勿把本项目输出直接用于带电线路作业或真实飞行控制。
@@ -31,7 +31,7 @@ RailDrone Mission Studio 把最终系统中原本分散的三类问题放在一�
 
 | 工作区 | 路由 | 当前能力 | 主要输出 |
 | --- | --- | --- | --- |
-| 航点任务编辑 | `/` | 添加、选择、拖动和编辑无人机航点；路线插值仿真；本地保存与项目导入导出 | 任务 JSON、仿真状态与日志 |
+| 航点任务编辑 | `/mission` | 添加、选择、拖动和编辑无人机航点；路线插值仿真；本地保存与项目导入导出 | 任务 JSON、仿真状态与日志 |
 | 接触线识别与复核 | `/recognition` | 本地图片/MP4 当前帧采样；候选折线提取；控制点编辑；接受/驳回与撤销 | schema `1.0` 标注 JSON、原尺寸标注 PNG |
 | 机器人—无人机协同闭环 | `/coordination` | 虚拟反馈闭环、视频影子跟踪、三障碍协同循环、安全互锁与故障注入 | 协同状态、协议审计、跟踪/引导结果和运行快照 |
 
@@ -139,12 +139,12 @@ npm run preview
 
 ### 推荐体验顺序
 
-1. 打开 `/coordination`，保留“虚拟闭环”，点击“启动”。
+1. 打开上方任一“统一入口”，在选择页进入“协同闭环”，保留“虚拟闭环”并点击“启动”。
 2. 观察机器人在 O1 发起请求、双端 Ready、越障、重新捕获线路，以及无人机前往 O2 等待。
 3. 分别注入线路丢失、机器人通信中断和越障失败，检查 `LINE_RECOVERY`、`SAFE_HOLD` 和重新互锁。
 4. 切换到“视频影子”，选择本地 MP4，观察连续跟踪与建议指令；该模式不会控制视频或设备。
-5. 打开 `/recognition` 载入示例，体验候选线人工校正、审核和 JSON/PNG 导出。
-6. 返回 `/`，导入 [任务规划示例](public/examples/rail-drone-demo.json) 或自行创建航点并运行路线仿真。
+5. 使用顶部切换栏进入“接触线识别”，载入示例并体验候选线人工校正、审核和 JSON/PNG 导出。
+6. 使用顶部切换栏进入“任务编排”，导入 [任务规划示例](public/examples/rail-drone-demo.json) 或自行创建航点并运行路线仿真。
 
 接触线示例素材位于 [public/examples/contact-line-demo.svg](public/examples/contact-line-demo.svg)。
 
@@ -212,10 +212,10 @@ rail-drone-mission-studio/
 ├─ src/
 │  ├─ components/
 │  │  ├─ canvas/                     # 航点与路线 SVG 图层
-│  │  ├─ layout/                     # 任务编辑器布局
+│  │  ├─ layout/                     # 全局工作区导航与任务编辑器布局
 │  │  ├─ recognition/                # 识别、标注与复核组件
 │  │  └─ coordination/               # 感知、协同地图、状态与故障组件
-│  ├─ data/                          # 默认任务和协同场景
+│  ├─ data/                          # 工作区目录、默认任务和协同场景
 │  ├─ services/
 │  │  ├─ recognition/                # 帧采样、适配器与导出
 │  │  ├─ tracking/                   # 时序跟踪与最新帧循环
@@ -223,7 +223,7 @@ rail-drone-mission-studio/
 │  │  └─ coordination/               # 纯状态机、引擎与机器人模拟链路
 │  ├─ stores/                        # 六个 Pinia store
 │  ├─ types/                         # TypeScript 数据契约
-│  ├─ views/                         # 三个工作区
+│  ├─ views/                         # 统一选择页与三个工作区
 │  └─ router/
 ├─ tests/                            # 协同、跟踪与引导测试
 ├─ package.json
