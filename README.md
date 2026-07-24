@@ -4,6 +4,15 @@
 
 本项目验证的目标流程是：巡检机器人负责沿接触网线路移动和缺陷检测；当机器人遇到无法自行通过的障碍时，无人机执行抽象的越障辅助，确认机器人恢复后重新锁定指定接触线，自主飞往下一障碍点等待。
 
+## 在线体验
+
+| 部署环境 | 主工作区 | 接触线识别 | 协同闭环 |
+| --- | --- | --- | --- |
+| GitHub Pages | [打开任务编辑器](https://1379475267-svg.github.io/rail-drone-mission-studio/) | [打开识别工作区](https://1379475267-svg.github.io/rail-drone-mission-studio/#/recognition) | [打开协同闭环](https://1379475267-svg.github.io/rail-drone-mission-studio/#/coordination) |
+| 阿里云 | [打开任务编辑器](http://fhrzz.me/projects/rail-drone-mission-studio/) | [打开识别工作区](http://fhrzz.me/projects/rail-drone-mission-studio/#/recognition) | [打开协同闭环](http://fhrzz.me/projects/rail-drone-mission-studio/#/coordination) |
+
+两个入口均部署自公开仓库的 `main` 分支。阿里云版本挂载在个人站点的独立 `/projects/rail-drone-mission-studio/` 路径下，不替换站点主页；服务器当前沿用 HTTP，请勿在该入口处理敏感或未脱敏素材。
+
 > [!IMPORTANT]
 > 当前仓库是浏览器端的软件原型，不连接真实无人机、机器人或飞控。接触线识别采用确定性的图像边缘启发式基线，越障机构采用模拟适配器，二维闭环不代表真实飞行验证。请勿把本项目输出直接用于带电线路作业或真实飞行控制。
 
