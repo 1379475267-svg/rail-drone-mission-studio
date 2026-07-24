@@ -1,0 +1,186 @@
+{
+  "id": "project-rail-drone-demo",
+  "name": "接触网协同巡检演示",
+  "version": "1.0.0",
+  "createdAt": "2026-07-24T00:00:00.000Z",
+  "updatedAt": "2026-07-24T00:00:00.000Z",
+  "poles": [],
+  "contactLines": [],
+  "obstacles": [],
+  "inspectionPoints": [],
+  "droneWaypoints": [
+    {
+      "id": "waypoint-p1",
+      "name": "P1",
+      "type": "DRONE_WAYPOINT",
+      "position": {
+        "x": 100,
+        "y": 420
+      },
+      "visible": true,
+      "remark": "起飞点",
+      "altitude": 0,
+      "speed": 1,
+      "yaw": 0,
+      "action": "TAKEOFF",
+      "stayDuration": 0,
+      "critical": true,
+      "order": 1
+    },
+    {
+      "id": "waypoint-p2",
+      "name": "P2",
+      "type": "DRONE_WAYPOINT",
+      "position": {
+        "x": 260,
+        "y": 300
+      },
+      "visible": true,
+      "remark": "接近接触网",
+      "altitude": 5,
+      "speed": 1.5,
+      "yaw": 0,
+      "action": "FLY_TO",
+      "stayDuration": 0,
+      "critical": false,
+      "order": 2
+    },
+    {
+      "id": "waypoint-p3",
+      "name": "P3",
+      "type": "DRONE_WAYPOINT",
+      "position": {
+        "x": 460,
+        "y": 250
+      },
+      "visible": true,
+      "remark": "机器人投放点",
+      "altitude": 4,
+      "speed": 1,
+      "yaw": 0,
+      "action": "DEPLOY_ROBOT",
+      "stayDuration": 0,
+      "critical": true,
+      "order": 3
+    },
+    {
+      "id": "waypoint-p4",
+      "name": "P4",
+      "type": "DRONE_WAYPOINT",
+      "position": {
+        "x": 680,
+        "y": 220
+      },
+      "visible": true,
+      "remark": "障碍前等待点",
+      "altitude": 4.5,
+      "speed": 1.5,
+      "yaw": 0,
+      "action": "WAIT_ROBOT",
+      "stayDuration": 0,
+      "critical": true,
+      "order": 4
+    },
+    {
+      "id": "waypoint-p5",
+      "name": "P5",
+      "type": "DRONE_WAYPOINT",
+      "position": {
+        "x": 850,
+        "y": 210
+      },
+      "visible": true,
+      "remark": "障碍后释放点",
+      "altitude": 4,
+      "speed": 1,
+      "yaw": 0,
+      "action": "RELEASE_ROBOT",
+      "stayDuration": 0,
+      "critical": true,
+      "order": 5
+    },
+    {
+      "id": "waypoint-p6",
+      "name": "P6",
+      "type": "DRONE_WAYPOINT",
+      "position": {
+        "x": 100,
+        "y": 420
+      },
+      "visible": true,
+      "remark": "返航点",
+      "altitude": 0,
+      "speed": 2,
+      "yaw": 0,
+      "action": "RETURN_HOME",
+      "stayDuration": 0,
+      "critical": true,
+      "order": 6
+    }
+  ],
+  "robotMarkers": [],
+  "noFlyZones": [],
+  "missionNodes": [
+    {
+      "id": "mission-node-p1",
+      "name": "P1 · 起飞点",
+      "action": "TAKEOFF",
+      "waypointId": "waypoint-p1",
+      "duration": 0,
+      "speed": 1,
+      "order": 1
+    },
+    {
+      "id": "mission-node-p2",
+      "name": "P2 · 接近接触网",
+      "action": "FLY_TO",
+      "waypointId": "waypoint-p2",
+      "duration": 0,
+      "speed": 1.5,
+      "order": 2
+    },
+    {
+      "id": "mission-node-p3",
+      "name": "P3 · 机器人投放点",
+      "action": "DEPLOY_ROBOT",
+      "waypointId": "waypoint-p3",
+      "duration": 0,
+      "speed": 1,
+      "order": 3
+    },
+    {
+      "id": "mission-node-p4",
+      "name": "P4 · 障碍前等待点",
+      "action": "WAIT_ROBOT",
+      "waypointId": "waypoint-p4",
+      "duration": 0,
+      "speed": 1.5,
+      "order": 4
+    },
+    {
+      "id": "mission-node-p5",
+      "name": "P5 · 障碍后释放点",
+      "action": "RELEASE_ROBOT",
+      "waypointId": "waypoint-p5",
+      "duration": 0,
+      "speed": 1,
+      "order": 5
+    },
+    {
+      "id": "mission-node-p6",
+      "name": "P6 · 返航点",
+      "action": "RETURN_HOME",
+      "waypointId": "waypoint-p6",
+      "duration": 0,
+      "speed": 2,
+      "order": 6
+    }
+  ],
+  "settings": {
+    "showGrid": true,
+    "snapToGrid": true,
+    "gridSize": 20,
+    "pixelsPerMeter": 40,
+    "autoSave": true
+  }
+}

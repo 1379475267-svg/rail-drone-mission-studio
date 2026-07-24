@@ -1,0 +1,25 @@
+[
+  {
+    "date": "2026-07-24",
+    "macrostructure": "Map / Diagram",
+    "theme": "Cobalt",
+    "enrichment": "none",
+    "brief": "Robot-drone contact-line coordination closed-loop and video-shadow demo",
+    "variation": "synchronized forward perception and top-down coordination map, three-workspace navigation, state/interlock rail, and dense protocol event colophon"
+  },
+  {
+    "date": "2026-07-24",
+    "macrostructure": "Workbench",
+    "theme": "Cobalt",
+    "enrichment": "none",
+    "brief": "Contact-line media recognition and manual review workspace extension",
+    "variation": "media-review-three-pane; media-first stage, review inspector, and timeline instead of the waypoint editor five-zone shell"
+  },
+  {
+    "date": "2026-07-24",
+    "macrostructure": "Workbench",
+    "theme": "Cobalt",
+    "enrichment": "none",
+    "brief": "RailDrone Mission Studio waypoint editor and simulation MVP"
+  }
+]

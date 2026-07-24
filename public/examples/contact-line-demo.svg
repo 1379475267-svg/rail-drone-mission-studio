@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
+  <title id="title">铁路接触线识别示例</title>
+  <desc id="description">浅色天空中的接触线、承力索、支柱和远处铁路，用于本机边缘识别演示。</desc>
+  <style>
+    :root {
+      --sample-sky: oklch(91% 0.028 230);
+      --sample-haze: oklch(84% 0.035 220);
+      --sample-ground: oklch(55% 0.035 142);
+      --sample-ground-dark: oklch(39% 0.04 145);
+      --sample-steel: oklch(30% 0.026 258);
+      --sample-steel-soft: oklch(45% 0.025 258);
+      --sample-wire: oklch(18% 0.02 258);
+      --sample-rail: oklch(66% 0.018 258);
+      --sample-sleeper: oklch(48% 0.025 75);
+    }
+  </style>
+  <rect width="1600" height="900" fill="var(--sample-sky)"/>
+  <path d="M0 435 C270 395 500 420 760 378 C1020 337 1290 375 1600 320 L1600 590 L0 590 Z" fill="var(--sample-haze)"/>
+  <path d="M0 570 C310 520 570 548 850 503 C1130 458 1380 476 1600 438 L1600 900 L0 900 Z" fill="var(--sample-ground)"/>
+  <path d="M0 650 C380 607 740 616 1120 565 C1300 541 1460 530 1600 518 L1600 900 L0 900 Z" fill="var(--sample-ground-dark)" opacity="0.42"/>
+
+  <g fill="none" stroke="var(--sample-steel)" stroke-width="12">
+    <path d="M165 170 L165 760 M1330 115 L1330 690"/>
+  </g>
+  <g fill="none" stroke="var(--sample-steel-soft)" stroke-width="8">
+    <path d="M165 210 L475 190 M1330 155 L1010 180"/>
+    <path d="M165 210 L115 270 M475 190 L425 248 M1330 155 L1380 215 M1010 180 L1060 238"/>
+  </g>
+
+  <g fill="none" stroke="var(--sample-wire)" stroke-linecap="round">
+    <path d="M85 258 C390 215 710 238 1025 187 C1235 153 1420 160 1555 139" stroke-width="7"/>
+    <path d="M80 347 L1550 215" stroke-width="6"/>
+    <path d="M210 276 L207 335 M430 247 L426 316 M650 231 L646 296 M875 211 L871 276 M1100 174 L1097 255 M1320 159 L1317 236" stroke-width="4"/>
+  </g>
+
+  <g fill="none" stroke="var(--sample-rail)" stroke-width="12">
+    <path d="M340 900 L760 575 M1090 900 L900 575"/>
+  </g>
+  <g stroke="var(--sample-sleeper)" stroke-width="15" opacity="0.82">
+    <path d="M270 855 L1165 855 M310 805 L1135 805 M360 755 L1098 755 M415 705 L1068 705 M475 660 L1035 660 M545 620 L1000 620 M625 588 L960 588"/>
+  </g>
+</svg>
